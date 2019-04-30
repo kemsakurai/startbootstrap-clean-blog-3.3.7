@@ -85,7 +85,7 @@ gulp.task('browserSync', function() {
 gulp.task('uncss-bootstrap', function () {
     var plugins = [
         uncss({
-            html: ['index.html', 'about.html', 'contact.html','post.html'],
+            html: ['index.html', 'about.html', 'contact.html','post.html','index2.html','post2.html'],
             ignore: ['.glyphicon',
                      '.glyphicon-user',
                      '.glyphicon-folder-close',
@@ -120,7 +120,7 @@ gulp.task('add-swap-bootstrap', function () {
 gulp.task('uncss-font-awesome', function () {
     var plugins = [
         uncss({ 
-            html: ['index.html', 'about.html', 'contact.html','post.html']
+            html: ['index.html', 'about.html', 'contact.html','post.html','index2.html','post2.html'],
         }),
     ];
     return gulp.src('vendor/font-awesome/css/font-awesome.css')
