@@ -8,6 +8,12 @@
     "type": "MIT",
     "url": "https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE"
   },
+  "scripts": {
+    "uncss-bootstrap": "gulp uncss-bootstrap",
+    "uncss-font-awesome": "gulp uncss-font-awesome",
+    "optimize-bootstrap": "gulp uncss-bootstrap && gulp add-swap-bootstrap",
+    "optimize-font-awesome": "gulp uncss-font-awesome && gulp add-swap-font-awesome"
+  },
   "devDependencies": {
     "bootstrap": "^3.3.7",
     "browser-sync": "^2.13.0",
@@ -16,12 +22,17 @@
     "gulp-clean-css": "^2.0.10",
     "gulp-header": "^1.8.7",
     "gulp-less": "^3.1.0",
+    "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.5.4",
-    "jquery": "^1.11.3"
+    "jquery": "^1.11.3",
+    "postcss-font-display": "^0.1.2",
+    "postcss-uncss": "^0.16.1",
+    "uncss": "^0.16.2"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/BlackrockDigital/startbootstrap-clean-blog.git"
-  }
+  },
+  "dependencies": {}
 }

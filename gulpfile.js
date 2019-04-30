@@ -6,6 +6,8 @@ var cleanCSS = require('gulp-clean-css');
 var rename = require("gulp-rename");
 var uglify = require('gulp-uglify');
 var pkg = require('./package.json');
+var postcss = require('gulp-postcss');
+var uncss = require('postcss-uncss');
 
 // Set the banner content
 var banner = ['/*!\n',
@@ -80,6 +82,56 @@ gulp.task('browserSync', function() {
         },
     })
 })
+// Run uncss
+gulp.task('uncss-bootstrap', function () {
+    var plugins = [
+        uncss({
+            html: ['index.html', 'about.html', 'contact.html','post.html'],
+            ignore: ['.glyphicon',
+                     '.glyphicon-user',
+                     '.glyphicon-folder-close',
+                     '.glyphicon-calendar',
+                     '.glyphicon-comment']
+        }),
+    ];
+    return gulp.src('vendor/bootstrap/css/bootstrap.css')
+        .pipe(postcss(plugins))
+        .pipe(rename({
+            extname: '.optimized.css'
+          }))
+        .pipe(gulp.dest('vendor/bootstrap/css'));
+});
+
+// Run uncss
+gulp.task('add-swap-bootstrap', function () {
+    return gulp.src('vendor/bootstrap/css/bootstrap.optimized.css')
+        .pipe(postcss([ require('postcss-font-display')({ display: 'swap', replace: false }) ]))
+        .pipe(rename('bootstrap.optimized.css'))
+        .pipe(gulp.dest('vendor/bootstrap/css'));
+});
+
+// Run uncss
+gulp.task('uncss-font-awesome', function () {
+    var plugins = [
+        uncss({ 
+            html: ['index.html', 'about.html', 'contact.html','post.html']
+        }),
+    ];
+    return gulp.src('vendor/font-awesome/css/font-awesome.css')
+        .pipe(postcss(plugins))
+        .pipe(rename({
+            extname: '.optimized.css'
+          }))
+        .pipe(gulp.dest('vendor/font-awesome/css'));
+});
+
+// Run uncss
+gulp.task('add-swap-font-awesome', function () {
+    return gulp.src('vendor/font-awesome/css/font-awesome.optimized.css')
+        .pipe(postcss([ require('postcss-font-display')({ display: 'swap', replace: false }) ]))
+        .pipe(rename('font-awesome.optimized.css'))
+        .pipe(gulp.dest('vendor/font-awesome/css'));
+});
 
 // Dev task with browserSync
 gulp.task('dev', ['browserSync', 'less', 'minify-css', 'minify-js'], function() {
