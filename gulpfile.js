@@ -59,7 +59,6 @@ gulp.task('copy', function() {
 
     gulp.src(['node_modules/jquery/dist/jquery.js', 'node_modules/jquery/dist/jquery.min.js'])
         .pipe(gulp.dest('vendor/jquery'))
-
     gulp.src([
             'node_modules/font-awesome/**',
             '!node_modules/font-awesome/**/*.map',
@@ -91,7 +90,14 @@ gulp.task('uncss-bootstrap', function () {
                      '.glyphicon-user',
                      '.glyphicon-folder-close',
                      '.glyphicon-calendar',
-                     '.glyphicon-comment']
+                     '.glyphicon-comment',
+                     '.icon-bar',
+                     '.visible-lg',
+                     '.navbar-collapse.in',
+                     '.navbar-right',
+                     '.btn-group-sm',
+                     '.navbar-form',
+                    ]
         }),
     ];
     return gulp.src('vendor/bootstrap/css/bootstrap.css')
