@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+    
+        <title>Clean Blog - Sample Post</title>
+    
+        <!-- Bootstrap Core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    
+        <!-- Theme CSS -->
+        <link href="css/clean-blog.min.css" rel="stylesheet">
+    
+        <!-- Custom Fonts -->
+        <link href="vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
+        <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body id="body">
+    <div class="navbar navbar-default navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header page-scroll">
+                <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button><a class="navbar-brand" data--event-action="click" data-ga-event-category="home" href="/">Monotalk</a>
+                <p class="navbar-text visible-lg">日々の書き込み</p>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li id="dropdown-menu-home"><a data-category="navi" href="/">ホーム</a></li>
+                    <li class="" id="about"><a data-category="navi" href="/about/">About</a></li>
+                    <li class="" id="categories"><a data-category="navi" href="/categories/">Categories</a></li>
+                    <li class="" id="statistics"><a data-category="navi" href="/statistics/">Statistics</a></li>
+                </ul>
+                <form action="/search/" class="navbar-form navbar-right btn-group-sm" role="search">
+                    <div class="form-group">
+                        <input class="form-control" name="q" placeholder="検索" type="text" value="" />
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="type">
+                            <option value="">全て</option>
+                            <option value="blog.BlogPost">ブログ投稿</option>
+                            <option value="pages.Page">ページ</option>
+                        </select>
+                    </div>
+                    <input class="btn" type="submit" value="移動" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <header class="intro-header" style="background-image: url('img/post-bg.jpg')">
+        <div class="container">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 site-heading">
+                <h1>サーバー指標 を Google Analytics に記録する</h1>
+                <div class="entry-meta-subheading"><span class="author">投稿者: <a data-ga-event-action="click" data-ga-event-category="author" data-ga-event-label="kem" href="/blog/author/monotalk/">kem</a></span> <span class="divider">/</span> <span>右記内 <a data-ga-event-action="click" data-ga-event-category="category" data-ga-event-label="Google Analytics" href="/blog/category/google-analytics/">Google Analytics</a>, <a data-ga-event-action="click" data-ga-event-category="category" data-ga-event-label="Python" href="/blog/category/python/">Python</a></span> <span class="divider">/</span> <span>投稿日:<time datetime="2019-01-26T06:00:00+09:00">2019-01-26</time> ( 3 ヶ月 ago)</span> <span class="divider">/</span> <span>更新日:<time datetime="2019-01-26T02:46:17.317514+09:00">2019-01-26</time> ( 3 ヶ月 ago)</span> <span class="divider">/</span> <span class="comment"><a data-disqus-identifier="BlogPost-546" data-ga-event-action="click" data-ga-event-category="discus_comment" data-ga-event-label="/blog/Record-server-metrics-in-Google-Analytics/" href="/blog/Record-server-metrics-in-Google-Analytics/#disqus_thread">コメント</a></span></div>
+                <div class="bottom20">
+                    <div id="share">
+                        <ul class="center-block">
+                            <li class="share-twitter"><a data-ga-event-action="click" data-ga-event-category="sns" data-ga-event-label="twitter" href="https://twitter.com/intent/tweet?url=http%3A//bit.ly/2RNswsq&amp;text=%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E6%8C%87%E6%A8%99%20%E3%82%92%20Google%20Analytics%20%E3%81%AB%E8%A8%98%E9%8C%B2%E3%81%99%E3%82%8B" rel="noopener noreferrer" target="_blank">Twitter</a></li>
+                            <li class="share-facebook"><a data-ga-event-action="click" data-ga-event-category="sns" data-ga-event-label="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://www.monotalk.xyz/blog/Record-server-metrics-in-Google-Analytics/" rel="noopener noreferrer" target="_blank">Facebook</a></li>
+                            <li class="share-hatena"><a data-ga-event-action="click" data-ga-event-category="sns" data-ga-event-label="hatena" href="http://b.hatena.ne.jp/add?mode=confirm&amp;url=http%3A//bit.ly/2RNswsq&amp;title=%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E6%8C%87%E6%A8%99%20%E3%82%92%20Google%20Analytics%20%E3%81%AB%E8%A8%98%E9%8C%B2%E3%81%99%E3%82%8B" rel="noopener noreferrer" target="_blank">はてブ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <section class="container" id="blog">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" data-split-id="entry-wrap">
+                <div class="blog">
+                    <div class="blog-item"><ins class="adsbygoogle" data-ad-client="ca-pub-6873737391821354" data-ad-format="auto" data-ad-slot="3267953226" style="display:block"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                        <hr/>
+                    </div>
+                    <div class="blog-item">
+                        <div class="blog-content">
+                            <script type="application/ld+json">
+
+                                {"@context": "http://schema.org", "@type": "BlogPosting", "headline": "サーバー指標 を Google Analytics に記録する", "author": {"@type": "Person", "name": "kem"}, "publisher": {"@type": "Organization", "url": "https://www.monotalk.xyz", "name": "kem", "logo": {"@type": "ImageObject", "url": "https://drive.google.com/uc?export=view&id=0By5O5w7iwOMOVE5pTEcyeE40WlE"}}, "image": {"@type": "ImageObject", "url": "https://drive.google.com/uc?export=view&id=0By5O5w7iwOMOMDdhaDhHdXBVTHc", "height": 450, "width": 800}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://www.monotalk.xyz/blog/Record-server-metrics-in-Google-Analytics/"}, "genre": "Google Analytics Python", "wordcount": "9797", "numberOfPunctuation": "160", "datePublished": "2019-01-25 21:00:00+00:00", "dateCreated": "2019-01-25 17:43:23.893509+00:00", "dateModified": "2019-01-25 17:46:17.317514+00:00", "description": "最近、サーバー監視に Mackerel（マカレル）: 新世代のサーバ管理・監視サービス を使い始めました。 \n閾値の監視や、Webhook 等便利なのですが、無料版だとデータの保持期限が1日で、1週間、1ヶ月等の長めの期間でのデータを保持してもらうためには有料版を使う必要があります。 \nもう少し長めの期間のデータを記録したかったので、何か実現方法はないか調べたところ、Google Analytics に 指標を記録する例がありました。 \nHow to use Google Analytics to Monitor Your Servers (or anything else!) | mojocode.com "}
+
+                            </script>
+                            <p>最近、サーバー監視に <a href="https://mackerel.io/ja/">Mackerel（マカレル）: 新世代のサーバ管理・監視サービス</a> を使い始めました。
+                                <br/> 閾値の監視や、Webhook 等便利なのですが、無料版だとデータの保持期限が1日で、1週間、1ヶ月等の長めの期間でのデータを保持してもらうためには有料版を使う必要があります。
+                                <br/> もう少し長めの期間のデータを記録したかったので、何か実現方法はないか調べたところ、Google Analytics に 指標を記録する例がありました。
+                                <br/> <a href="http://www.mojocode.com/content/how-use-google-analytics-monitor-your-servers-or-anything-else">How to use Google Analytics to Monitor Your Servers (or anything else!) | mojocode.com</a></p>
+                            <p>同じことを Bash ではなくて、Python で サーバー指標を 記録して Google Analytics に送付できるか試してみたので、実施した結果を記載します。</p>
+                            <ol>
+                                <li><a href="#GoogleAnalytics">何故 Google Analytics に記録するか?</a></li>
+                                <li><a href="#">データの記録方法</a>
+                                    <br/> 2.1. <a href="#-1">記録する指標について</a>
+                                    <br/> 2.2. <a href="#-1">使い方</a>
+                                    <br/> 2.3. <a href="#-1">使用環境</a>
+                                    <br/> 2.4. <a href="#GoogleAnalytics-1">Google Analytics の設定</a>
+                                    <br/> 2.5. <a href="#-1">依存ライブラリのインストール</a>
+                                    <br/> 2.6. <a href="#sysstat1">sysstat の インストール、記録間隔を1分にする</a>
+                                    <br/> 2.7. <a href="#-1">スケジュール設定</a></li>
+                                <li><a href="#-1">データ可視化</a>
+                                    <br/> 3.1. <a href="#loadavg1">loadavg1 を取得する</a>
+                                    <br/> 3.2. <a href="#Google">Google スプレッドシート で可視化</a>
+                                    <br/> 3.3. <a href="#GoogleDataPortal">Google Data Portal での可視化</a></li>
+                                <li><a href="#-1">実施後の感想</a></li>
+                                <li><a href="#-1">参考</a></li>
+                            </ol>
+                            <hr/>
+                            <h2 id="1-google-analytics">1. <a name="GoogleAnalytics"></a>何故 Google Analytics に記録するか?</h2>
+                            <p>Google Analytics に記録したい理由を以下に記載します。</p>
+                            <ul>
+                                <li>
+                                    <p>Server に保持すると、ディスク容量を消費する
+                                        <br/> Server 側で保持することもできますが、VPS 1台でブログは運用しています。
+                                        <br/> ディクス容量を消費するのでこれは避けたかったです。</p>
+                                </li>
+                                <li>
+                                    <p>基本的に無料で使える
+                                        <br/> Google Analytics であればデータは1年半保持され、月1千万イベントまで無料で使えます。
+                                        <br/> 1年半保時されれば、週、月単位での変化が把握できます。これを無料で実現できるのはメリットかなと思いました。</p>
+                                </li>
+                                <li>
+                                    <p>デフォルトでグラフを描画できる機能がある
+                                        <br/> 本来の使い方ではないかもしれませんが、記録したデータを可視化するための機能があります。
+                                        <br/> データの設定方法によっては何もしなくても可視化してくれるかもしれませんが、そこまで考えなくてもカスタムレポート、Google Data Portal 等で柔軟な可視化が行えます。<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
+                                </li>
+                            </ul>
+                            <hr/>
+                            <h2 id="2">2. <a name=""></a>データの記録方法</h2>
+                            <p>作成したスクリプトを、<a href="https://github.com/kemsakurai/server-metrics-2-ga">kemsakurai/server-metrics-2-ga: The python tool to record server metrics in Google Analytics</a> に UP しました。
+                                <br/> 以下に 記録される指標、スクリプトの使い方を記載します。</p>
+                            <h3 id="21">2.1. <a name="-1"></a>記録する指標について</h3>
+                            <p>以下の指標を、Google Analytics のイベントとして記録します。</p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th align="left">記録する指標</th>
+                                        <th align="left">Event Category</th>
+                                        <th align="left">Event Action</th>
+                                        <th align="left">Event Label</th>
+                                        <th align="left">Event Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td align="left">loadavg1</td>
+                                        <td align="left">loadavg</td>
+                                        <td align="left">loadavg1</td>
+                                        <td align="left">計測値</td>
+                                        <td align="left">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">loadavg5</td>
+                                        <td align="left">loadavg</td>
+                                        <td align="left">loadavg5</td>
+                                        <td align="left">計測値</td>
+                                        <td align="left">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">loadavg15</td>
+                                        <td align="left">loadavg</td>
+                                        <td align="left">loadavg15</td>
+                                        <td align="left">計測値</td>
+                                        <td align="left">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">cpu user</td>
+                                        <td align="left">cpu-xx</td>
+                                        <td align="left">user</td>
+                                        <td align="left">計測値</td>
+                                        <td align="left">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">cpu system</td>
+                                        <td align="left">cpu-xx</td>
+                                        <td align="left">system</td>
+                                        <td align="left">計測値</td>
+                                        <td align="left">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">cpu iowait</td>
+                                        <td align="left">cpu-xx</td>
+                                        <td align="left">iowait</td>
+                                        <td align="left">計測値</td>
+                                        <td align="left">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">memory total</td>
+                                        <td align="left">memory</td>
+                                        <td align="left">total</td>
+                                        <td align="left">計測値 (MB)</td>
+                                        <td align="left">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">memory used</td>
+                                        <td align="left">memory</td>
+                                        <td align="left">used</td>
+                                        <td align="left">計測値 (MB)</td>
+                                        <td align="left">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">memory available</td>
+                                        <td align="left">memory</td>
+                                        <td align="left">available</td>
+                                        <td align="left">計測値 (MB)</td>
+                                        <td align="left">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">swap total</td>
+                                        <td align="left">swap</td>
+                                        <td align="left">total</td>
+                                        <td align="left">計測値 (MB)</td>
+                                        <td align="left">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">swap used</td>
+                                        <td align="left">swap</td>
+                                        <td align="left">used</td>
+                                        <td align="left">計測値 (MB)</td>
+                                        <td align="left">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">swap available</td>
+                                        <td align="left">swap</td>
+                                        <td align="left">available</td>
+                                        <td align="left">計測値 (MB)</td>
+                                        <td align="left">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">io rtps</td>
+                                        <td align="left">io</td>
+                                        <td align="left">rtps</td>
+                                        <td align="left">計測値</td>
+                                        <td align="left">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">io wtps</td>
+                                        <td align="left">io</td>
+                                        <td align="left">wtps</td>
+                                        <td align="left">計測値</td>
+                                        <td align="left">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">disk total size</td>
+                                        <td align="left">filesystem-xx</td>
+                                        <td align="left">total</td>
+                                        <td align="left">計測値(MB)</td>
+                                        <td align="left">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">disk used size</td>
+                                        <td align="left">filesystem-xx</td>
+                                        <td align="left">used</td>
+                                        <td align="left">計測値(MB)</td>
+                                        <td align="left">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">network rxkB</td>
+                                        <td align="left">network-xxx</td>
+                                        <td align="left">rxkB</td>
+                                        <td align="left">計測値</td>
+                                        <td align="left">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">network txkB</td>
+                                        <td align="left">network-xxx</td>
+                                        <td align="left">txkB</td>
+                                        <td align="left">計測値</td>
+                                        <td align="left">0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <ul>
+                                <li>
+                                    <p><strong>補足</strong></p>
+                                    <ul>
+                                        <li>
+                                            <p><code>xxx</code>、<code>xx</code> の記載について
+                                                <br/> filesystem 等は環境により、device 数が変わります。
+                                                <br/> デバイスごとに複数回記録送信されます。</p>
+                                        </li>
+                                        <li>
+                                            <p><code>計測値</code>について
+                                                <br/> 計測値 には 記録した数値が設定されます。</p>
+                                        </li>
+                                        <li>
+                                            <p>Event Value について
+                                                <br/> 全て 0 を設定しています。整数の値のみ設定可能で、設定可能な指標もありますが、少数項目で設定できない場合もあるため、一律 0 で</p>
+                                        </li>
+                                        <li>
+                                            <p>Timestamp をカスタムディメンションとして記録
+                                                <br/> イベント送信時にカスタムディメンション 1 に Timestamp を記録します。</p>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <h3 id="22">2.2. <a name="-1"></a>使い方</h3>
+                            <p>以下、スクリプトの使い方について記載します。</p>
+                            <h3 id="23">2.3. <a name="-1"></a>使用環境</h3>
+                            <p>以下の環境で動作確認、稼働しています。</p>
+                            <ul>
+                                <li>
+                                    <p><strong>OS</strong>
+                                        <br/>
+                                    </p>
+                                    <div class="codehilite"><pre><span></span><span class="go">cat /etc/redhat-release </span>
+<span class="go">CentOS Linux release 7.6.1810 (Core) </span>
+</pre></div>
+                                    <p></p>
+                                </li>
+                                <li>
+                                    <p><strong>Python のバージョン</strong>
+                                        <br/>
+                                    </p>
+                                    <div class="codehilite"><pre><span></span><span class="go">python3.6 -V</span>
+<span class="go">Python 3.6.4</span>
+</pre></div>
+                                    <p></p>
+                                </li>
+                            </ul>
+                            <h3 id="24-google-analytics">2.4. <a name="GoogleAnalytics-1"></a>Google Analytics の設定</h3>
+                            <p>以下、Google Analytics の設定を行います。</p>
+                            <ul>
+                                <li>
+                                    <p><strong>サーバーのメトリクス記録用のプロパティを作成する。</strong>
+                                        <br/> Pageview 等を記録しているプロパティでも記録できますが、それなりのデータ量になります。
+                                        <br/> 別途、新規でプロパティを作成しサーバーのメトリクスのみ記録するようにするのをお薦めします。
+                                        <br/> いか、アナリティクスヘルプのプロパティの追加手順になります。
+                                        <br/> <a href="https://support.google.com/analytics/answer/1042508?hl=ja">プロパティを設定する - アナリティクス ヘルプ</a></p>
+                                </li>
+                                <li>
+                                    <p><strong>カスタムディメンションの追加</strong>
+                                        <br/> 以下、Timestamp 設定用のカスタムディメンションを追加します。
+                                        <br/> カスタムディメンションの Index 番号は 1です。
+                                        <br/><img alt="2019-01-25 23.28.19.png - Google ドライブ" src="https://drive.google.com/uc?export=view&amp;id=1YyEIK850lnWaMbaGUGSmz9DMnA1JDu_n" /></p>
+                                </li>
+                            </ul>
+                            <h3 id="25">2.5. <a name="-1"></a>依存ライブラリのインストール</h3>
+                            <p>以下のライブラリに依存します。
+                                <br/> * <strong><a href="https://github.com/giampaolo/psutil">giampaolo/psutil: Cross-platform lib for process and system monitoring in Python</a></strong>
+                                <br/> Python で、サーバーのメトリクスを取得できるライブラリです。
+                                <br/> スクリプト内でのデータの取得は、<code>psutil</code>、<code>os</code> のモジュールで取得可能はデータは取得し、取得できない指標は、<code>subprocess</code> で直接 Linux コマンドを実行して取得しています。各メトリクスの取得方法は<a href="https://www.monotalk.xyz/blog/Get-server-metrics-in-Python/">Python で サーバメトリクス を取得する | Monotalk</a> でまとめました。よろしければご確認ください。</p>
+                            <ul>
+                                <li>
+                                    <p><strong><a href="https://github.com/mirumee/google-measurement-protocol">mirumee/google-measurement-protocol: A Python implementation of Google Analytics Measurement Protocol</a></strong>
+                                        <br/> Measurement Protocol を簡単に送信するするためのライブラリです。カスタム速度、例外等のエラーの送付はできません。今回はイベントの送付を行いたかったので使用しました。</p>
+                                </li>
+                                <li>
+                                    <p><strong>pip でインストール</strong>
+                                        <br/> いか、コマンドでインストールできます。
+                                        <br/>
+                                    </p>
+                                    <div class="codehilite"><pre><span></span><span class="go">pip install psutil</span>
+<span class="go">pip install google_measurement_protocol    </span>
+</pre></div>
+                                    <p></p>
+                                </li>
+                            </ul>
+                            <h3 id="26-sysstat-1">2.6. <a name="sysstat1"></a>sysstat の インストール、記録間隔を1分にする</h3>
+                            <p>yum で sysstat をインストールし、記録間隔を1分にします。
+                                <br/> インストールは以下の記事が参考になりました。
+                                <br/> <a href="https://qiita.com/fk_2000/items/340ec95b77f73a1f3ad9">sarインストール＆設定手順 - Qiita</a></p>
+                            <p>インストール後に、以下のように <code>/etc/cron.d/sysstat</code> を編集します。</p>
+                            <ul>
+                                <li><strong>/etc/cron.d/sysstat</strong>
+                                    <br/>
+                                    <div class="codehilite"><pre><span></span># Run system activity accounting tool every 1 minutes
+*/1 * * * * root /usr/lib64/sa/sa1 1 1
+# Run system activity accounting tool every 10 minutes
+#*/10 * * * * root /usr/lib64/sa/sa1 1 1
+# 0 * * * * root /usr/lib64/sa/sa1 600 6 &amp;
+# Generate a daily summary of process accounting at 23:53
+53 23 * * * root /usr/lib64/sa/sa2 -A
+</pre></div>
+                                </li>
+                            </ul>
+                            <p>スクリプト内では、<code>sadf</code> というコマンドを実行していますが、これは <code>sysstat</code> に付属しており、<code>sysstat</code> をインストールすると使用可能になります。</p>
+                            <h3 id="27">2.7. <a name="-1"></a>スケジュール設定</h3>
+                            <p>サーバーにスクリプト配置後、cron で動かす場合は以下のように記載します。
+                                <br/>
+                            </p>
+                            <div class="codehilite"><pre><span></span><span class="go">*/1 * * * * /bin/python3.6 /scripts/server_metrics_2_ga.py -p UA-xxxxxxxx    </span>
+</pre></div>上記だと、エラー時に Mail 送信の対象になります。
+                            <br/> 標準エラーも含めてログに書き出す場合は以下のように記載します。
+                            <br/>
+                            <div class="codehilite"><pre><span></span><span class="go"> */1 * * * * /bin/python3.6 /scripts/server_metrics_2_ga.py -p UA-xxxxxxxx &amp;&gt;&gt; /var/log/server_metrics_2_ga.log</span>
+</pre></div>コンソールから実行することもできます。<code>UA-xxxxxxxx</code> には Google Analytics のプロパティID を指定してください。
+                            <br/>
+                            <div class="codehilite"><pre><span></span><span class="go">python3.6 server_metrics_2_ga.py -p UA-xxxxxxxx    </span>
+</pre></div>
+                            <p></p>
+                            <hr/>
+                            <h2 id="3">3. <a name="-1"></a>データ可視化</h2>
+                            <p><a href="https://chrome.google.com/webstore/detail/google-analytics/fefimfimnhjjkomigakinmjileehfopp?hl=ja">Google Analytics - Google スプレッドシート アドオン</a> を使ってデータを取得します。
+                                <br/> 全てのデータ取得設定は記載していませんが、同じ要領で設定が可能です。</p>
+                            <h3 id="31-loadavg1">3.1. <a name="loadavg1"></a>loadavg1 を取得する</h3>
+                            <p>loadavg1 の設定例を記載します。
+                                <br/> Google Analytics アドオンで Create Report 実行後に作成される <code>Report Configuration</code> シートに以下の内容を入力します。</p>
+                            <ul>
+                                <li>View ID
+                                    <br/> Google Analytics の View ID を指定します。</li>
+                                <li>Report Name
+                                    <br/> シート名になります。<code>loadavg1</code> にします。</li>
+                                <li>Start Date
+                                    <br/> 1ヶ月分のデータを取得したいので、<code>30daysAgo</code> にします。</li>
+                                <li>End Date
+                                    <br/> 当日を示す <code>today</code> を入力します。</li>
+                                <li>Metrics
+                                    <br/> <code>ga:eventValue</code> を指定します。値は使用しないですが、必須で指定する必要があるためです。</li>
+                                <li>Dimensions
+                                    <br/> <code>ga:eventLabel,ga:dimension1</code> を指定します。dimension1 には Timestamp が設定されている想定です。</li>
+                                <li>Order
+                                    <br/> Timestamp でソートした状態にしたいので、<code>ga:dimension1</code> を指定します。</li>
+                                <li>Filters
+                                    <br/> 絞り込み条件です。 <code>ga:eventCategory==loadavg;ga:eventAction==loadavg1</code> を指定します。</li>
+                                <li>Segments
+                                    <br/> 未設定です。</li>
+                                <li>
+                                    <p>Limit
+                                        <br/> 50000件を指定します。取得可能な最大値です。</p>
+                                </li>
+                                <li>
+                                    <p>設定イメージ
+                                        <br/> 以下のようになります。
+                                        <br/><img alt="2019-01-26 1.39.56.png - Google ドライブ" src="https://drive.google.com/uc?export=view&amp;id=176c8TH2MuefO8JLlvSJgqxcgc47DOMKH" /></p>
+                                </li>
+                            </ul>
+                            <h3 id="32-google">3.2. <a name="Google"></a>Google スプレッドシート で可視化</h3>
+                            <p>時間感覚の短いデータを記録するのは Google スプレッドシート の グラフ機能の方が見やすいかと思います。
+                                <br/> 3日分のloadavg1 を可視化すると以下のように描画されました。
+                                <br/><img alt="2019-01-26 1.47.36.png - Google ドライブ" src="https://drive.google.com/uc?export=view&amp;id=1JujKgV7TRBZ20LZj_BJHuVsd_HNqNHfC" /></p>
+                            <h3 id="33-google-data-portal">3.3. <a name="GoogleDataPortal"></a>Google Data Portal での可視化</h3>
+                            <p>Google Data Portal で 同じ期間の可視化を行うと以下のようになります。
+                                <br/> Google Data Portal だと、日付単位で平均計算できるのがメリットで、このグラフで長めの期間でのサーバー指標の傾向を把握できます。
+                                <br/> 期間選択では日付以下の単位での絞り込み、可視化ができないのでそこは、スプレッドシートのグラフ描画機能を使うことになります。
+                                <br/><img alt="2019-01-26 2.23.47.png - Google ドライブ" src="https://drive.google.com/uc?export=view&amp;id=15MkfkEHHaiceQiKKUsIQSTRg8bWrQlxW" /></p>
+                            <hr/>
+                            <h2 id="4">4. <a name="-1"></a>実施後の感想</h2>
+                            <p>実施後、以下感想を持ちました。</p>
+                            <ul>
+                                <li>
+                                    <p><strong>可視化が面倒</strong>
+                                        <br/> Google Data Portal で描画しましたが、データソース を Google Analytics AddOn を使ってスプレッドシートに抽出し 作るので手間です。
+                                        <br/> 取得したデータを加工して１つのデータソースにする、もしくは、そもそも イベントではなく カスタム指標で設定すればまとめて取得が可能になります。</p>
+                                </li>
+                                <li>
+                                    <p><strong>アラート機能</strong>
+                                        <br/> Google Analytics の カスタムアラート機能の組合わせができると、リアルタイム性はないですが急激な変化を検知してくれるので良いかなと思います。
+                                        <br/> これも、カスタム指標として設定した方が使いやすいかと思います。</p>
+                                </li>
+                                <li>
+                                    <p><strong>取得するデータ量の問題</strong>
+                                        <br/> 1分おきのサーバー指標取得だと、1日 1440 回記録されます。 Google Analytics Addon の データ取得件数が 50000 件なので 34 日分しか取得できません。
+                                        <br/> これより長い期間を保持する場合は、Addon だけでは無理で データ保持の仕組みを構築する必要があります。</p>
+                                </li>
+                            </ul>
+                            <hr/>
+                            <h2 id="5">5. <a name="-1"></a>参考</h2>
+                            <p>以下、参考にした記事へのリンクです。</p>
+                            <ul>
+                                <li><a href="https://www.server-world.info/query?os=CentOS_7&amp;p=sysstat">CentOS 7 : SysStat インストールと設定 : Server World</a></li>
+                                <li>[How to use Google Analytics to Monitor Your Servers (or anything else!) | mojocode.com]</li>
+                            </ul>
+                            <p>実際に試してみて、カスタム指標で記録すべきかもと思いました。カスタム指標は、整数、通貨(少数)、時間 が選択でき、サーバー指標だと通貨(少数)かとは思われるのですが、これでいい感じでになるかはやはり試してみないとわからないので、後日試してみようかと思います。
+                                <br/> 以上です。</p>
+                            <div class="footnote">
+                                <hr/>
+                                <ol>
+                                    <li id="fn:1">
+                                        <p>作成したスクリプトのデータ設定方法だと、Google Analytics 上ではいい感じに可視化ができませんでした。指標と、ディメンションを意識したデータ設定が必要になります。 <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+                                    </li>
+                                </ol>
+                            </div>
+                            <div id="comments">
+                                <h3>コメント</h3>
+                                <div class="comments-list">
+                                    <div id="disqus_thread"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-item">
+                        <ul class="pager">
+                            <li class="previous"><a data-ga-event-action="click" data-ga-event-category="blog_post" data-ga-event-label="/blog/Get-server-metrics-in-Python/" href="/blog/Get-server-metrics-in-Python/">&lt; Python で サーバメトリクス を取得する</a></li>
+                            <li class="next"><a data-ga-event-action="click" data-ga-event-category="blog_post" data-ga-event-label="" href="/blog/I-created-a-Google-Apps-Script-to-generate-prh.yml-from-a-spreadsheet/">スプレッドシート から prh.yml を生... &gt;</a></li>
+                        </ul>
+                        <div class="blog-item">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>カテゴリー</h3>
+                                    <ul>
+                                        <li><a data-category="category" href="/blog/category/google-analytics/">Google Analytics</a></li>
+                                        <li><a data-category="category" href="/blog/category/python/">Python</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12" id="related-posts">
+                                    <h3>関連投稿</h3>
+                                    <ul>
+                                        <li><a data-ga-event-action="click" data-ga-event-category="related_post" data-ga-event-label="/blog/Viewed-from-a-programmer-point-of-view-Google-Analytics/" href="/blog/Viewed-from-a-programmer-point-of-view-Google-Analytics/">プログラマ視点で見た、Google Analytics</a></li>
+                                        <li><a data-ga-event-action="click" data-ga-event-category="related_post" data-ga-event-label="/blog/Link-Drift-and-Google-Analytics-as-a-chat-service/" href="/blog/Link-Drift-and-Google-Analytics-as-a-chat-service/">チャットサービス Drift とGoogle Analytics を連携する</a></li>
+                                        <li><a data-ga-event-action="click" data-ga-event-category="related_post" data-ga-event-label="/blog/How-to-shorten-google-analytics-campaign-parameters/" href="/blog/How-to-shorten-google-analytics-campaign-parameters/">Google Analytics キャンペーンパラメータ を短縮する方法</a></li>
+                                        <li><a data-ga-event-action="click" data-ga-event-category="related_post" data-ga-event-label="/blog/convert-ga-to-dataframe-by-Google2Pandas/" href="/blog/convert-ga-to-dataframe-by-Google2Pandas/">Google2Pandas で、Google Analytics のデータを pandas Dataframe に変換する</a></li>
+                                        <li><a data-ga-event-action="click" data-ga-event-category="related_post" data-ga-event-label="/blog/google-analytics-%E3%82%A2%E3%83%95%E3%82%A3%E3%83%8B%E3%83%86%E3%82%A3%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%81%AE%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%BF%BB%E8%A8%B3%E3%82%92%E8%BF%94%E3%81%99python-%E3%83%95%E3%82%A1%E3%83%B3%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B/" href="/blog/google-analytics-%E3%82%A2%E3%83%95%E3%82%A3%E3%83%8B%E3%83%86%E3%82%A3%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%81%AE%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%BF%BB%E8%A8%B3%E3%82%92%E8%BF%94%E3%81%99python-%E3%83%95%E3%82%A1%E3%83%B3%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B/">Google Analytics アフィニティカテゴリの日本語翻訳を返すpython ファンクションを作成する</a></li>
+                                        <li><a data-ga-event-action="click" data-ga-event-category="related_post" data-ga-event-label="/blog/google-analytics-spreadsheet-add-on-%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E9%96%A2%E9%80%A3%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B/" href="/blog/google-analytics-spreadsheet-add-on-%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E9%96%A2%E9%80%A3%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B/">Google Analytics Spreadsheet Add-on で、コンバージョン関連のデータを取得する</a></li>
+                                        <li><a data-ga-event-action="click" data-ga-event-category="related_post" data-ga-event-label="/blog/google-search-console-%E3%81%AE-%E3%82%AD%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%89%E3%81%AE%E5%85%B1%E8%B5%B7%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E5%9B%B3%E3%82%92-python-%E3%81%A7%E6%8F%8F%E7%94%BB%E3%81%99%E3%82%8B/" href="/blog/google-search-console-%E3%81%AE-%E3%82%AD%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%89%E3%81%AE%E5%85%B1%E8%B5%B7%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E5%9B%B3%E3%82%92-python-%E3%81%A7%E6%8F%8F%E7%94%BB%E3%81%99%E3%82%8B/">検索キーワードの、共起ネットワーク図を python で描画する</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>最近の投稿</h3>
+                                    <ul class="recent-posts">
+                                        <li><a data-category="recent_post" href="/blog/Use-UnCSS-with-gulp/">gulp で UnCSS を使う</a></li>
+                                        <li><a data-category="recent_post" href="/blog/Migrate-Wagtail-applications-running-in-the-original-Python-environment-to-the-venv-environment/">素の Python 環境で 動作している Wagtail のアプリケーションを venv 環境に移行する</a></li>
+                                        <li><a data-category="recent_post" href="/blog/Optimizing-SVG-using-Webpack-4-svgo-loader/">Webpack 4 svgo-loader を使い、SVG を最適化する</a></li>
+                                        <li><a data-category="recent_post" href="/blog/Webpack-4-OptimizeCSSAssetsPlugin-Optimize-CSS/">Webpack 4 OptimizeCSSAssetsPlugin CSSを最適化する</a></li>
+                                        <li><a data-category="recent_post" href="/blog/Remove-all-JavaScript-comments-when-compressing-Webpack-4/">Webpack 4 圧縮時にJavaScriptのコメントを全て削除する</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li><a data-category="sns_profile" href="https://twitter.com/monotalk_xyz" rel="noopener noreferrer" title="Author’s twitter"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a></li>
+                        <li><a data-category="sns_profile" href="https://github.com/kemsakurai" rel="noopener noreferrer" title="Author’s github"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright © Monotalk All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/clean-blog.min.js"></script>
+</body>
+
+</html>

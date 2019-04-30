@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+    
+        <title>Clean Blog - Sample Post</title>
+    
+        <!-- Bootstrap Core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    
+        <!-- Theme CSS -->
+        <link href="css/clean-blog.min.css" rel="stylesheet">
+    
+        <!-- Custom Fonts -->
+        <link href="vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
+        <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body id="body">
+    <div class="navbar navbar-default navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header page-scroll">
+                <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button><a class="navbar-brand" data--event-action="click" data-ga-event-category="home" href="/">Monotalk</a>
+                <p class="navbar-text visible-lg">日々の書き込み</p>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li id="dropdown-menu-home"><a data-category="navi" href="/">ホーム</a></li>
+                    <li class="" id="about"><a data-category="navi" href="/about/">About</a></li>
+                    <li class="" id="categories"><a data-category="navi" href="/categories/">Categories</a></li>
+                    <li class="" id="statistics"><a data-category="navi" href="/statistics/">Statistics</a></li>
+                </ul>
+                <form action="/search/" class="navbar-form navbar-right btn-group-sm" role="search">
+                    <div class="form-group">
+                        <input class="form-control" name="q" placeholder="検索" type="text" value="" />
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="type">
+                            <option value="">全て</option>
+                            <option value="blog.BlogPost">ブログ投稿</option>
+                            <option value="pages.Page">ページ</option>
+                        </select>
+                    </div>
+                    <input class="btn" type="submit" value="移動" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <header class="intro-header" style="background-image: url('img/post-bg.jpg')">
+        <div class="container">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 site-heading">
+                <h1>PostgresSQL の Backup を取得して、Google Cloud Storage に保存する</h1>
+                <div class="entry-meta-subheading"><span class="author">投稿者: <a data-ga-event-action="click" data-ga-event-category="author" data-ga-event-label="kem" href="/blog/author/monotalk/">kem</a></span> <span class="divider">/</span> <span>右記内 <a data-ga-event-action="click" data-ga-event-category="category" data-ga-event-label="postgresql" href="/blog/category/postgresql/">postgresql</a></span> <span class="divider">/</span> <span>投稿日:<time datetime="2018-09-17T01:04:01+09:00">2018-09-17</time> ( 7 ヶ月, 2 週間 ago)</span> <span class="divider">/</span> <span>更新日:<time datetime="2018-09-17T11:38:03.925486+09:00">2018-09-17</time> ( 7 ヶ月, 2 週間 ago)</span> <span class="divider">/</span> <span class="comment"><a data-disqus-identifier="BlogPost-511" data-ga-event-action="click" data-ga-event-category="discus_comment" data-ga-event-label="/blog/Retrieve-PostgresSQL-Backup-and-save-it-in-Google-Cloud-Storage/" href="/blog/Retrieve-PostgresSQL-Backup-and-save-it-in-Google-Cloud-Storage/#disqus_thread">コメント</a></span></div>
+                <div class="bottom20">
+                    <div id="share">
+                        <ul class="center-block">
+                            <li class="share-twitter"><a data-ga-event-action="click" data-ga-event-category="sns" data-ga-event-label="twitter" href="https://twitter.com/intent/tweet?url=http%3A//bit.ly/2NeJei0&amp;text=PostgresSQL%20%E3%81%AE%20Backup%20%E3%82%92%E5%8F%96%E5%BE%97%E3%81%97%E3%81%A6%E3%80%81Google%20Cloud%20Storage%20%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B" rel="noopener noreferrer" target="_blank">Twitter</a></li>
+                            <li class="share-facebook"><a data-ga-event-action="click" data-ga-event-category="sns" data-ga-event-label="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://www.monotalk.xyz/blog/Retrieve-PostgresSQL-Backup-and-save-it-in-Google-Cloud-Storage/" rel="noopener noreferrer" target="_blank">Facebook</a></li>
+                            <li class="share-hatena"><a data-ga-event-action="click" data-ga-event-category="sns" data-ga-event-label="hatena" href="http://b.hatena.ne.jp/add?mode=confirm&amp;url=http%3A//bit.ly/2NeJei0&amp;title=PostgresSQL%20%E3%81%AE%20Backup%20%E3%82%92%E5%8F%96%E5%BE%97%E3%81%97%E3%81%A6%E3%80%81Google%20Cloud%20Storage%20%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B" rel="noopener noreferrer" target="_blank">はてブ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <section class="container" id="blog">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" data-split-id="entry-wrap">
+                <div class="blog">
+                    <div class="blog-item"><ins class="adsbygoogle" data-ad-client="ca-pub-6873737391821354" data-ad-format="auto" data-ad-slot="3267953226" style="display:block"></ins>
+                        <hr/>
+                    </div>
+                    <div class="blog-item">
+                        <div class="blog-content">
+                            <script type="application/ld+json">
+
+                                {"@context": "http://schema.org", "@type": "BlogPosting", "headline": "PostgresSQL の Backup を取得して、Google Cloud Storage に保存する", "author": {"@type": "Person", "name": "kem"}, "publisher": {"@type": "Organization", "url": "https://www.monotalk.xyz", "name": "kem", "logo": {"@type": "ImageObject", "url": "https://drive.google.com/uc?export=view&id=0By5O5w7iwOMOVE5pTEcyeE40WlE"}}, "image": {"@type": "ImageObject", "url": "https://drive.google.com/uc?export=view&id=0By5O5w7iwOMOMDdhaDhHdXBVTHc", "height": 450, "width": 800}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://www.monotalk.xyz/blog/Retrieve-PostgresSQL-Backup-and-save-it-in-Google-Cloud-Storage/"}, "genre": "postgresql", "wordcount": "7218", "numberOfPunctuation": "75", "datePublished": "2018-09-16 16:04:01+00:00", "dateCreated": "2018-09-16 16:04:59.838353+00:00", "dateModified": "2018-09-17 02:38:03.925486+00:00", "description": "18年運用したサイトのデータが消えました | Monotalk の反省から、当 Blog の PostgresSQL の バックアップを取得して、Google Cloud Storage に保存するようにしました。 \n実施したことを記載します。 "}
+
+                            </script>
+                            <p><a href="https://www.monotalk.xyz/blog/The-data-of-the-site-operated-for-18-years-has-disappeared/">18年運用したサイトのデータが消えました | Monotalk</a> の反省から、当 Blog の PostgresSQL の バックアップを取得して、Google Cloud Storage に保存するようにしました。
+                                <br/> 実施したことを記載します。</p>
+                            <hr/>
+                            <h2 id="_1">前提</h2>
+                            <p>以下の環境で動作確認は実施しています。</p>
+                            <ul>
+                                <li>
+                                    <p><strong>OS</strong>
+                                        <br/>
+                                    </p>
+                                    <div class="codehilite"><pre><span></span><span class="go">cat /etc/redhat-release </span>
+<span class="go">CentOS Linux release 7.5.1804 (Core) </span>
+</pre></div>
+                                    <p></p>
+                                </li>
+                                <li>
+                                    <p><strong>PostgresSQLのVersion</strong>
+                                        <br/>
+                                    </p>
+                                    <div class="codehilite"><pre><span></span><span class="go">psql -V</span>
+<span class="go">psql (PostgreSQL) 9.6.10</span>
+</pre></div>
+                                    <p></p>
+                                </li>
+                            </ul>
+                            <hr/>
+                            <h2 id="_2">バックアップの対象と、バックアップ先</h2>
+                            <p>PostgresSQL の dump ファイルをバックアップの対象として、Google Cloud Storage に保存します。
+                                <br/> バックアップは日次で実施し 10日分をバックアップとして保持、10日以前のデータは削除します。</p>
+                            <hr/>
+                            <h2 id="google-cloud-storage">Google Cloud Storage を バックアップ 先に使用する理由</h2>
+                            <p>バックアップ 先には Google Cloud Storage を使用します。
+                                <br/> 使用する理由を以下に記載します。</p>
+                            <ol>
+                                <li>5GB まで無料で使える。</li>
+                                <li>世代管理ができる。</li>
+                                <li>Google Drive でも同様のことはできそうだが、システムで保存するデータと手動で保存しているデータの Storage を分けたかった。</li>
+                            </ol>
+                            <p>Google Drive に バックアップ する方法のあるようで検索すると 保存方法がヒットします。
+                                <br/> 個人的には以下の記事が気になりました。</p>
+                            <ul>
+                                <li><a href="https://news.mynavi.jp/article/20160912-google-tips032/">Googleお役立ちテクニック - Googleドライブで「版」を管理する | マイナビニュース</a></li>
+                                <li><a href="https://qiita.com/rice_american/items/ceae28dad13c3977e3a8">PostgresSQLのbackup, restore方法まとめ</a></li>
+                                <li><a href="https://zapier.com/apps/google-drive/integrations/postgresql">Google Drive &amp; PostgreSQL Integrations | Zapier</a></li>
+                                <li><a href="https://postgresql-backup.com/postgresql-blog/how-to-backup-postgresql-to-google-drive/">How to Backup PostgreSQL to Google Drive - PostgreSQL Backup</a></li>
+                                <li><a href="https://gist.github.com/ilfuriano/7b163ea22e2ed94d4967256bead5c1f7">Backup Postgres DB to Google Drive</a></li>
+                                <li><a href="https://timothy-quinn.com/backing-up-confluence-postgresql-to-google-drive/">Backing up Confluence PostgreSQL to Google Drive</a></li>
+                            </ul>
+                            <hr/>
+                            <h2 id="_3">バックアップスクリプトをスケジュール実行する</h2>
+                            <p>バックアップスクリプトを作成し、crontab で スケジュール実行します。
+                                <br/> スクリプトでは、<code>gsutil</code> を使いますので、まず <code>gsutil</code> のインストールを実施します。</p>
+                            <h3 id="gsutil">gsutil をインストールする</h3>
+                            <p>以下を参考に、<code>gsutil</code> をインストールします。
+                                <br/> <a href="https://cloud.google.com/storage/docs/gsutil_install?hl=ja#linux">gsutil をインストールする  |  Cloud Storage ドキュメント  |  Google Cloud</a></p>
+                            <ul>
+                                <li><strong>gsutil の取得</strong>
+                                    <br/> curl コマンドで、google cloud sdk を取得します。
+                                    <br/>
+                                    <div class="codehilite"><pre><span></span><span class="go">curl https://sdk.cloud.google.com | bash    </span>
+</pre></div>コマンドを実行するとダウンロードが開始します。
+                                    <br/> まず、インストール先のディレクトリを聞かれます。デフォルトでは、実行ユーザーの<code>home</code> ディレクトリ配下がインストール先になります。
+                                    <br/> このまま、エンターを押しました。
+                                    <br/>
+                                    <div class="codehilite"><pre><span></span><span class="go">Downloading Google Cloud SDK install script: https://dl.google.com/dl/cloudsdk/channels/rapid/install_google_cloud_sdk.bash</span>
+<span class="gp">#</span><span class="c1">####################################################################### 100.0%</span>
+<span class="go">Running install script from: /tmp/tmp.TSbMQDRiEN/install_google_cloud_sdk.bash</span>
+<span class="go">which curl</span>
+<span class="go">curl -# -f https://dl.google.com/dl/cloudsdk/channels/rapid/google-cloud-sdk.tar.gz</span>
+<span class="gp">#</span><span class="c1">####################################################################### 100.0%</span>
+
+<span class="go">Installation directory (this will create a google-cloud-sdk subdirectory) (/home/xxxxxxxxxxxx):       </span>
+</pre></div>続いて、<code>PATH</code> に google cloud sdk のコマンドを追加するか聞かれます。
+                                    <br/> <code>y</code> を選択して、エンターを押しました。
+                                    <br/>
+                                    <div class="codehilite"><pre><span></span><span class="go">Modify profile to update your $PATH and enable shell command </span>
+<span class="go">completion?</span>
+
+<span class="go">Do you want to continue (Y/n)?  y</span>
+</pre></div><code>.bashrc</code> のバックアップが取得され、<code>.bashrc</code> には google cloud sdk のコマンドのパスが追加されました。
+                                    <br/>
+                                    <div class="codehilite"><pre><span></span><span class="go">Enter a path to an rc file to update, or leave blank to use </span>
+<span class="go">[/home/xxxxxxxxxxxx/.bashrc]:    </span>
+<span class="go">Backing up [/home/xxxxxxxxxxxx/.bashrc] to [/home/xxxxxxxxxxxx/.bashrc.backup].</span>
+<span class="go">[/home/xxxxxxxxxxxx/.bashrc] has been updated.</span>
+</pre></div><code>.bashrc</code> の設定反映のためシェルスクリプトを再読み込みします。
+                                    <br/>
+                                    <div class="codehilite"><pre><span></span><span class="go">exec -l $SHELL</span>
+</pre></div>gcloud の初期化を実行します。
+                                    <br/>
+                                    <div class="codehilite"><pre><span></span><span class="go">gcloud init</span>
+</pre></div>OAuth 認証のためログインを促されます。<code>y</code> を入力してエンターを押します。
+                                    <br/>
+                                    <div class="codehilite"><pre><span></span><span class="go">Network diagnostic detects and fixes local network connection issues.</span>
+<span class="go">Checking network connection...done.                                                                                                                                                        </span>
+<span class="go">Reachability Check passed.</span>
+<span class="go">Network diagnostic (1/1 checks) passed.</span>
+
+<span class="go">You must log in to continue. Would you like to log in (Y/n)?  y</span>
+</pre></div>表示されるURLにブラウザでアクセスします。
+                                    <br/> ログイン後に表示されるコードをコピーして、<code>Enter verification code:</code> の後にペーストします。
+                                    <br/>
+                                    <div class="codehilite"><pre><span></span><span class="go">Go to the following link in your browser:</span>
+<span class="go">    https://accounts.google.com/o/oauth2/auth?redirect_uri=........</span>
+<span class="go">Enter verification code: </span>
+</pre></div>認証が通ると、対象のプロジェクト番号を聞かれます。対象の番号を選択して、エンターを押します。
+                                    <br/>
+                                    <div class="codehilite"><pre><span></span><span class="go">You are logged in as: [xxxxxxxxxxxxxx@gmail.com].</span>
+
+<span class="go">Pick cloud project to use: </span>
+<span class="go"> [1] xxxxxxxxxxxxxxxxxxxx</span>
+<span class="go"> [2] xxxxxxxxxxxx</span>
+<span class="go"> [3] Create a new project</span>
+<span class="go">Please enter numeric choice or text value (must exactly match list </span>
+</pre></div><code>gsutil version</code> と入力して Version 番号が表示されれば上手くインストールができています。
+                                    <br/>
+                                    <div class="codehilite"><pre><span></span><span class="go">gsutil version</span>
+<span class="go">gsutil version: 4.33      </span>
+</pre></div>
+                                </li>
+                            </ul>
+                            <hr/>
+                            <h3 id="_4">スクリプトを実装、スケジューリング</h3>
+                            <p><a href="https://gist.github.com/studiotomi/231c321ba2a2abf41b7cba02c568f7a5">Back up postgres db to google cloud storage</a> を参考にスクリプトを作ります。</p>
+                            <ul>
+                                <li>
+                                    <p><strong>ps-snapshot.sh</strong></p>
+                                    <div class="codehilite"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># Requirements:</span>
+<span class="c1">#   - gcloud/gsutil is installed on the box</span>
+<span class="c1">#   - gcloud is logged in as a user with write access to Google Cloud Storage</span>
+<span class="c1">#   - The file has execution rights so that it can be run in cron</span>
+<span class="c1">#   - The Google Cloud Storage bucket already exits</span>
+
+<span class="c1"># Exit on any error</span>
+<span class="nb">set</span> -e
+
+<span class="nv">BUCKET</span><span class="o">=</span><span class="s1">'gs://your bucket'</span>
+<span class="nv">JOB_TIMESTAMP</span><span class="o">=</span><span class="sb">`</span>date +%Y%m%d-%H%M<span class="sb">`</span>
+<span class="nv">DATABASE</span><span class="o">=</span><span class="s1">'your database name'</span>
+<span class="nv">DIR</span><span class="o">=</span><span class="s1">'your_backup_dir'</span>
+<span class="nv">GS_UTIL</span><span class="o">=</span><span class="s1">'your gsutil path'</span>
+
+<span class="nb">cd</span> <span class="nv">$DIR</span>
+
+<span class="nv">NUMBER</span><span class="o">=</span><span class="sb">`</span><span class="s2">"</span><span class="nv">$GS_UTIL</span><span class="s2">"</span> ls <span class="s2">"</span><span class="nv">$BUCKET</span><span class="s2">*.gz"</span> <span class="p">|</span> wc -l<span class="sb">`</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$NUMBER</span> -gt <span class="m">10</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nv">FILE_NAME</span><span class="o">=</span><span class="sb">`</span><span class="s2">"</span><span class="nv">$GS_UTIL</span><span class="s2">"</span> ls <span class="s2">"</span><span class="nv">$BUCKET</span><span class="s2">*.gz"</span> <span class="p">|</span> head -n <span class="m">1</span><span class="sb">`</span>
+    gsutil rm -f <span class="s2">"</span><span class="nv">$FILE_NAME</span><span class="s2">"</span>
+<span class="k">else</span>
+    :
+<span class="k">fi</span>
+
+/usr/bin/pg_dump -w <span class="nv">$DATABASE</span> &gt; <span class="nv">$JOB_TIMESTAMP</span>-pad.sql
+
+/bin/tar -cvzf <span class="nv">$JOB_TIMESTAMP</span>.tar.gz <span class="nv">$JOB_TIMESTAMP</span>-pad.sql
+<span class="s2">"</span><span class="nv">$GS_UTIL</span><span class="s2">"</span> cp <span class="nv">$JOB_TIMESTAMP</span>.tar.gz <span class="s2">"</span><span class="nv">$BUCKET</span><span class="s2">"</span>
+
+rm -f <span class="nv">$JOB_TIMESTAMP</span>-pad.sql <span class="nv">$JOB_TIMESTAMP</span>.tar.gz                                                            
+</pre></div>
+                                    <p></p>
+                                </li>
+                                <li>
+                                    <p><strong>説明</strong></p>
+                                    <ol>
+                                        <li>
+                                            <p>バックアップは 10 まで取得する。
+                                                <br/> <code>if [ $NUMBER -gt 10 ]; then</code> あたりで、バックアップの取得数が10を超える場合削除しています。</p>
+                                        </li>
+                                        <li>
+                                            <p>pg_dump は <code>-w</code> オプションをつけて実行する。
+                                                <br/> DB ユーザと実行ユーザが異なり <code>pg_dmp</code> を実行する際 パスワード入力を求められたので <code>.pgpass</code> を作成し、<code>-w</code> オプションを付与し、パスワード入力を求められないようにしました。</p>
+                                        </li>
+                                        <li>
+                                            <p>Google Cloud Storage には、世代管理を行う機能があります。<a href="https://cloud.google.com/storage/docs/object-versioning?hl=ja">オブジェクトのバージョニング  |  Cloud Storage  |  Google Cloud</a> この機能を活用すると、世代管理を自前で行う必要はないのかもしれません。</p>
+                                        </li>
+                                        <li>
+                                            <p><code>GS_UTIL</code> には、<code>gsutil</code> のインストールパスを記載してください。私がインストールを実施した際はインストールユーザーの home ディレクトリ直下を選択したので、そのパスを記載しました。</p>
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <p><strong>crotab の設定</strong>
+                                        <br/> 以下のように crontab を設定しました。
+                                        <br/> 毎日 午前4時にバックアップを取得します。
+                                        <br/>
+                                    </p>
+                                    <div class="codehilite"><pre><span></span><span class="go">00 04 * * * /bin/sh /home/xxxxxxxxx/scripts/ps-snapshot.sh &gt;&gt; /var/log/jobs/ps-snapshot.log 2&gt;&amp;1</span>
+</pre></div>
+                                    <p></p>
+                                </li>
+                            </ul>
+                            <hr/>
+                            <h2 id="_5">参考</h2>
+                            <p>以下、作成時に、参考にした記事になります。</p>
+                            <ul>
+                                <li><a href="http://totutotu.hatenablog.com/entry/2016/05/13/161405">pg_dumpの実行時にパスワード入力を省略する - 珈琲駆動開発</a></li>
+                            </ul>
+                            <p>以上です。</p>
+                            <div id="comments">
+                                <h3>コメント</h3>
+                                <div class="comments-list">
+                                    <div id="disqus_thread"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-item">
+                        <ul class="pager">
+                            <li class="previous"><a data-ga-event-action="click" data-ga-event-category="blog_post" data-ga-event-label="/blog/The-data-of-the-site-operated-for-18-years-has-disappeared/" href="/blog/The-data-of-the-site-operated-for-18-years-has-disappeared/">&lt; 18年運用したサイトのデータが消えました</a></li>
+                            <li class="next"><a data-ga-event-action="click" data-ga-event-category="blog_post" data-ga-event-label="" href="/blog/python-%E3%81%A6-google-cloud-storage-%E3%81%A8bigquery-%E3%82%92%E4%BD%BF%E3%81%86%E9%81%8E%E7%A8%8B%E3%81%A6%E3%81%AE%E3%82%A8%E3%83%A9%E3%83%BC/">Python で Google Cloud ... &gt;</a></li>
+                        </ul>
+                        <div class="blog-item">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>カテゴリー</h3>
+                                    <ul>
+                                        <li><a data-category="category" href="/blog/category/postgresql/">postgresql</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12" id="related-posts">
+                                    <h3>関連投稿</h3>
+                                    <ul>
+                                        <li><a data-ga-event-action="click" data-ga-event-category="related_post" data-ga-event-label="/blog/postgres-sql-fatal-role-xxxxxx-is-not-permitted-to-log-in-%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%99%E3%82%8B/" href="/blog/postgres-sql-fatal-role-xxxxxx-is-not-permitted-to-log-in-%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%99%E3%82%8B/">Postgres sql: FATAL: role "xxxxxx" is not permitted to log in が発生する</a></li>
+                                        <li><a data-ga-event-action="click" data-ga-event-category="related_post" data-ga-event-label="/blog/django-%E3%81%AE-connection-pooling-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6-%E8%AA%BF%E3%81%B9%E3%81%A6%E3%81%BF%E3%81%BE%E3%81%97%E3%81%9F/" href="/blog/django-%E3%81%AE-connection-pooling-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6-%E8%AA%BF%E3%81%B9%E3%81%A6%E3%81%BF%E3%81%BE%E3%81%97%E3%81%9F/">django の connection pooling について 調べてみました。</a></li>
+                                        <li><a data-ga-event-action="click" data-ga-event-category="related_post" data-ga-event-label="/blog/google-%E3%83%A2%E3%83%90%E3%82%A4%E3%83%AB%E3%82%B5%E3%82%A4%E3%83%88%E8%AA%8D%E5%AE%9A%E3%82%92%E5%8F%96%E5%BE%97%E3%81%97%E3%81%A6%E3%81%BF%E3%81%BE%E3%81%97%E3%81%9F/" href="/blog/google-%E3%83%A2%E3%83%90%E3%82%A4%E3%83%AB%E3%82%B5%E3%82%A4%E3%83%88%E8%AA%8D%E5%AE%9A%E3%82%92%E5%8F%96%E5%BE%97%E3%81%97%E3%81%A6%E3%81%BF%E3%81%BE%E3%81%97%E3%81%9F/">Google モバイルサイト認定を取得してみました。</a></li>
+                                        <li><a data-ga-event-action="click" data-ga-event-category="related_post" data-ga-event-label="/blog/django-postgress-%E3%81%A7%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%9E%E5%89%8A%E9%99%A4%E5%BE%8C%E3%81%ABmigrate%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E5%AE%9F%E8%A1%8C%E3%81%A7%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%99%E3%82%8B/" href="/blog/django-postgress-%E3%81%A7%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%9E%E5%89%8A%E9%99%A4%E5%BE%8C%E3%81%ABmigrate%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E5%AE%9F%E8%A1%8C%E3%81%A7%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%99%E3%82%8B/">Django postgress でスキーマ削除後に、migrateコマンド実行でエラーが発生する</a></li>
+                                        <li><a data-ga-event-action="click" data-ga-event-category="related_post" data-ga-event-label="/blog/postgresql-connection-to-database-failed-fe_sendauth-no-password-supplied/" href="/blog/postgresql-connection-to-database-failed-fe_sendauth-no-password-supplied/">postgresql pg_upgrade実施時に、connection to database failed: fe_sendauth: no password supplied が発生</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>最近の投稿</h3>
+                                    <ul class="recent-posts">
+                                        <li><a data-category="recent_post" href="/blog/Use-UnCSS-with-gulp/">gulp で UnCSS を使う</a></li>
+                                        <li><a data-category="recent_post" href="/blog/Migrate-Wagtail-applications-running-in-the-original-Python-environment-to-the-venv-environment/">素の Python 環境で 動作している Wagtail のアプリケーションを venv 環境に移行する</a></li>
+                                        <li><a data-category="recent_post" href="/blog/Optimizing-SVG-using-Webpack-4-svgo-loader/">Webpack 4 svgo-loader を使い、SVG を最適化する</a></li>
+                                        <li><a data-category="recent_post" href="/blog/Webpack-4-OptimizeCSSAssetsPlugin-Optimize-CSS/">Webpack 4 OptimizeCSSAssetsPlugin CSSを最適化する</a></li>
+                                        <li><a data-category="recent_post" href="/blog/Remove-all-JavaScript-comments-when-compressing-Webpack-4/">Webpack 4 圧縮時にJavaScriptのコメントを全て削除する</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li><a data-category="sns_profile" href="https://twitter.com/monotalk_xyz" rel="noopener noreferrer" title="Author’s twitter"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a></li>
+                        <li><a data-category="sns_profile" href="https://github.com/kemsakurai" rel="noopener noreferrer" title="Author’s github"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright © Monotalk All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
