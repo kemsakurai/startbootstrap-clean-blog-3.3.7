@@ -11,6 +11,7 @@
   "scripts": {
     "uncss-bootstrap": "gulp uncss-bootstrap",
     "uncss-font-awesome": "gulp uncss-font-awesome",
+    "add-swap-font-awesome": "gulp add-swap-font-awesome",
     "optimize-bootstrap": "gulp uncss-bootstrap && gulp add-swap-bootstrap",
     "optimize-font-awesome": "gulp uncss-font-awesome && gulp add-swap-font-awesome"
   },
