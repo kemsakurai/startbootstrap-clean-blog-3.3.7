@@ -97,6 +97,12 @@ gulp.task('uncss-bootstrap', function () {
                      '.navbar-right',
                      '.btn-group-sm',
                      '.navbar-form',
+                     '.collapse',
+                     '.collapse.in',
+                     '.collapsing',
+                     '.nav',
+                     ':after',
+                     ':before'
                     ]
         }),
     ];
